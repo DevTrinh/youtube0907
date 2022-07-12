@@ -73,8 +73,8 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
         getJsonValueSearch(API_SEARCH);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvListValueSearch.setLayoutManager(linearLayoutManager);
-        Toast.makeText(getContext(), listValueSearch.size()
-                + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), listValueSearch.size()
+//                + "", Toast.LENGTH_SHORT).show();
         adapterValueSearch = new AdapterValueSearch(listValueSearch,
                 new InterfaceClickFrameVideo() {
                     @Override
@@ -82,7 +82,6 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                         /*IMAGEVIEW ONCLICK*/
                         Log.d("TITLE ON CLICK: " + position,
                                 listValueSearch.get(position).getTitleVideo());
-
                         intentSearchToPlayVideo.putExtra(VALUE_SEARCH,
                                 listValueSearch.get(position));
                         startActivity(intentSearchToPlayVideo);
@@ -93,7 +92,6 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                         /*TITTLE ONCLICK*/
                         Log.d("IMAGE VIEW ON CLICK: " + position,
                                 listValueSearch.get(position).getTitleVideo());
-
                         intentSearchToPlayVideo.putExtra(VALUE_SEARCH,
                                 listValueSearch.get(position));
                         startActivity(intentSearchToPlayVideo);
@@ -112,7 +110,6 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                     }
                 });
         rvListValueSearch.setAdapter(adapterValueSearch);
-        pbLoad.setVisibility(View.GONE);
 //        CLICK X IN etSearch
         etSearch.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -165,7 +162,7 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                         JSONObject jsonHigh = jsonThumbnail.getJSONObject(HIGH);
                         if (jsonThumbnail.has(HIGH)) {
                             listValueSearch.get(position).setUrlAvtChannel(jsonHigh.getString(URL) + "");
-                            Log.d("LINKKKKKKKK " + position, jsonHigh.getString(URL));
+//                            Log.d("LINKKKKKKKK " + position, jsonHigh.getString(URL));
                         }
                         JSONObject jsonStatics = jsonItem.getJSONObject(STATISTICS);
                         if (jsonStatics.has(SUBSCRIBE_COUNT)) {
@@ -175,7 +172,8 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                                             + "Subscribers");
 //                    Log.d("AAAAA " + position, urlChannel);
                         }
-                        adapterValueSearch.notifyDataSetChanged();
+
+                        adapterValueSearch.notifyItemChanged(position);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -191,6 +189,7 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
     }
 
     private void backSearch() {
+        ActivitySearchVideo.adapterHistorySearch.notifyItemChanged(0);
         getActivity().finish();
         Toast.makeText(getActivity(), "BACK", Toast.LENGTH_SHORT).show();
     }
@@ -211,7 +210,6 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                     String urlImage = "";
                     String channelTitle = "";
                     String viewCount = "";
-
                     JSONArray jsonItems = response.getJSONArray(ITEMS);
                     Log.d("JSON ITEMS: ", jsonItems.length() + "");
                     int size = 0;
@@ -245,6 +243,8 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                                 timeUp, channelId, titleVideo,
                                 descriptionVideo, urlImage,
                                 channelTitle, viewCount));
+                        pbLoad.setVisibility(View.GONE);
+
                     }
                 } catch (JSONException ignored) {
 
@@ -259,7 +259,7 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
             }
         });
         requestQueue.add(jsonObjectRequest);
-        Log.d("HUHUHUHUHUHUHUH", API_SEARCH);
+//        Log.d("HUHUHUHUHUHUHUH", API_SEARCH);
     }
 
     public void mapping(@NonNull View view) {

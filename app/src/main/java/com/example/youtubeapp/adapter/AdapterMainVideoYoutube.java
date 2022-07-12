@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class AdapterMainVideoYoutube extends
         RecyclerView.Adapter<AdapterMainVideoYoutube.ItemVideoMainViewHolder> {
 
-    private ArrayList<ItemVideoMain> listItemVideoMain = new ArrayList<>();
+    private ArrayList<ItemVideoMain> listItemVideoMain;
     private InterfaceClickFrameVideo interfaceClickFrameVideo;
 
     public AdapterMainVideoYoutube(ArrayList<ItemVideoMain> listItemVideoMain,

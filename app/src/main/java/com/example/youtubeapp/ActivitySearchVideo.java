@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class ActivitySearchVideo extends AppCompatActivity implements InterfaceDefaultValue {
     private RecyclerView rvHistorySearch;
-    private AdapterHistorySearch adapterHistorySearch;
+    public static AdapterHistorySearch adapterHistorySearch;
     public static EditText etSearch;
     private ArrayList<ItemSearch> listItemSearch = new ArrayList<>();
     private ArrayList<ItemSearch> listRevert = new ArrayList<>();
@@ -53,7 +53,7 @@ public class ActivitySearchVideo extends AppCompatActivity implements InterfaceD
             listSearchString = prefSearch.getArrayList(PREF_SEARCH);
             for (int i = 0; i<listSearchString.size(); i++){
                 listItemSearch.add(new ItemSearch(listSearchString.get(i)+""));
-                Log.d("SIZEEEEEEEEE "+i, listSearchString.get(i)+"");
+//                Log.d("SIZEEEEEEEEE "+i, listSearchString.get(i)+"");
             }
             for(int i = listItemSearch.size() - 1; i>0; i--){
                 listRevert.add(new ItemSearch(listItemSearch.get(i).getString()));

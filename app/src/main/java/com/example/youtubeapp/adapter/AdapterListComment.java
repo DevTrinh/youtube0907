@@ -1,5 +1,6 @@
 package com.example.youtubeapp.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeapp.R;
 import com.example.youtubeapp.item.ItemComment;
-import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterListComment extends
@@ -20,7 +21,7 @@ public class AdapterListComment extends
 
     List<ItemComment> listComment;
 
-    public AdapterListComment(List<ItemComment> listComment) {
+    public AdapterListComment(ArrayList<ItemComment> listComment) {
         this.listComment = listComment;
     }
 
@@ -32,18 +33,26 @@ public class AdapterListComment extends
         return new ListCommentViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ListCommentViewHolder holder, int position) {
         ItemComment itemComment = listComment.get(position);
         if (itemComment == null){
             return;
         }
-        Picasso.get().load(itemComment.getUrlAvtChannelComment()).into(holder.ivAvtItemComment);
+        if (itemComment.getUrlAvtChannelComment() != null){
+//            Picasso.get().load(itemComment.getUrlAvtChannelComment()).into(holder.ivAvtItemComment);
+        }
         holder.tvItemNameChannel.setText(itemComment.getNameChannelComment());
         holder.tvTimeAgoComment.setText(itemComment.getTimeComment());
         holder.tvContentComment.setText(itemComment.getContentComment());
         holder.tvNumberLikeComment.setText(itemComment.getNumberLikeComment());
-        holder.tvReplyComment.setText(itemComment.getReplyComment());
+        if (itemComment.getReplyComment().equals("0")){
+            holder.tvReplyComment.setText("");
+        }
+        else{
+            holder.tvReplyComment.setText(itemComment.getReplyComment() + " REPLIES");
+        }
     }
 
     @Override
@@ -62,10 +71,11 @@ public class AdapterListComment extends
 
         public ListCommentViewHolder(@NonNull View itemView) {
             super(itemView);
+            mapping(itemView);
         }
 
-        public void mapping(View view){
-            ivAvtItemComment = view.findViewById(R.id.iv_avt_user_comment);
+        public void mapping(@NonNull View view){
+            ivAvtItemComment = view.findViewById(R.id.iv_avt_user_comments);
             tvItemNameChannel = view.findViewById(R.id.tv_item_name_channel);
             tvTimeAgoComment = view.findViewById(R.id.tv_item_time_ago_comment);
             tvNumberLikeComment = view.findViewById(R.id.tv_item_number_like_comment);

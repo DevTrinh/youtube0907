@@ -32,6 +32,7 @@ import com.example.youtubeapp.adapter.AdapterMainVideoYoutube;
 import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 import com.example.youtubeapp.item.ItemVideoMain;
+import com.example.youtubeapp.pagination.PaginationScrollListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -54,6 +55,11 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
     public static AdapterMainVideoYoutube adapterMainVideoYoutube;
     public String testUrlAvtChannel;
 
+    private boolean isLoading;
+    private boolean isLastPage;
+    private int currentPage = 0;
+    private int totalPage = 5;
+
     @SuppressLint("NotifyDataSetChanged")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
@@ -63,19 +69,19 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                 container, false);
         mapping(view);
         pbLoadListVideoMain.setVisibility(View.VISIBLE);
-        rfMain.setOnRefreshListener(this);
+//        rfMain.setOnRefreshListener(this);
         LinearLayoutManager linearLayoutManager =
                 new LinearLayoutManager(getContext());
         rvListVideoMain.setLayoutManager(linearLayoutManager);
         LinearLayoutManager linearLayoutManagerHorizontal =
                 new LinearLayoutManager(getContext(),
                         LinearLayoutManager.HORIZONTAL, false);
-
         rvListHotKeys.setLayoutManager(linearLayoutManagerHorizontal);
         adapterListHotKeys = new AdapterListHotKeys(getListKey());
         rvListHotKeys.setAdapter(adapterListHotKeys);
-        getJsonApiYoutube();
         adapterListHotKeys.notifyDataSetChanged();
+
+        getJsonApiYoutube();
         adapterMainVideoYoutube = new AdapterMainVideoYoutube(listItemVideo,
                 new InterfaceClickFrameVideo() {
                     @Override
@@ -103,7 +109,6 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                         fragmentMenuItemVideoMain.show(getActivity()
                                 .getSupportFragmentManager(), getTag());
                     }
-
                     @Override
                     public void onClickChannelVideo(int position) {
 
@@ -112,6 +117,12 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
 
         rvListVideoMain.setAdapter(adapterMainVideoYoutube);
         return view;
+    }
+
+    private void setFirstData(){
+        if (currentPage < totalPage){
+//            adapterMainVideoYoutube.addFooterLoading();
+        }
     }
 
     private void getJsonApiYoutube() {
@@ -132,14 +143,16 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                             String viewCount = "";
                             String numberLiker = "";
                             String commentCount = "";
-                            String urlAvtChannel = "";
+                            String description = "";
                             JSONArray jsonItems = response.getJSONArray(ITEMS);
-                            Log.d("AAAAAAAAAAAAA", jsonItems.length() + "");
-                            for (int i = 0; i < jsonItems.length(); i++) {
+//                            Log.d("AAAAAAAAAAAAA", jsonItems.length() + "");
+                            for (int i = 0; i < 4; i++) {
                                 JSONObject jsonItem = jsonItems.getJSONObject(i);
                                 idVideo = jsonItem.getString(ID);
 //                                Log.d("ID: "+i, idVideo);
                                 JSONObject jsonSnippet = jsonItem.getJSONObject(SNIPPET);
+//                                Log.d("DESCRIPTION: ", jsonSnippet.getString("description"));
+                                description = jsonSnippet.getString(DESCRIPTION);
                                 titleVideo = jsonSnippet.getString(TITLE);
 //                                Log.d("Title: "+i, titleVideo);
                                 channelName = jsonSnippet.getString(CHANNEL_TITLE);
@@ -157,7 +170,9 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                                 JSONObject jsonStatistics = jsonItem.getJSONObject(STATISTICS);
                                 viewCount = formatData(jsonStatistics.getInt(VIEW_COUNT)) + " views";
 //                                Log.d("View Count: "+i, viewCount);
-                                numberLiker = formatData(jsonStatistics.getInt(LIKED_COUNT));
+                                if (jsonStatistics.has(LIKED_COUNT)){
+                                    numberLiker = formatData(jsonStatistics.getInt(LIKED_COUNT));
+                                }
 //                                Log.d("Number like"+i,numberLiker);
                                 if (jsonStatistics.has(COMMENT_COUNT)) {
                                     commentCount = formatData(Integer
@@ -167,7 +182,7 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                                 listItemVideo.add(new ItemVideoMain(titleVideo,
                                         urlThumbnail, idChannel, channelName,
                                         viewCount, publishedAt, idVideo,
-                                        commentCount, numberLiker));
+                                        commentCount, numberLiker, description));
                                 pbLoadListVideoMain.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
@@ -284,7 +299,7 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
     }
 
     public void mapping(@NonNull View view) {
-        rfMain = view.findViewById(R.id.rf_layout_main);
+//        rfMain = view.findViewById(R.id.rf_layout_main);
         pbLoadListVideoMain = view.findViewById(R.id.pb_load_list_video_main);
         rvListHotKeys = view.findViewById(R.id.lv_hot_keywords);
         rvListVideoMain = view.findViewById(R.id.rv_list_video_main);

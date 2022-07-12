@@ -6,9 +6,62 @@ import java.io.Serializable;
 
 public class ItemVideoMain implements Serializable, InterfaceDefaultValue {
 
-
+    private String viewPure;
+    private String timePure;
+    private String likePure;
     private String titleVideo;
-    private String urlThumbnail;
+    private String tvTitleVideo;
+    private String ivVideo;
+    private String idChannel;
+    private String tvNameChannel;
+    private String tvViewCount;
+    private String tvTimeUp;
+    private String idVideo;
+    private String tvCommentCount;
+    private String likeCount;
+    private String urlAvtChannel;
+    private String numberSubscribe;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getViewPure() {
+        return viewPure;
+    }
+
+    public void setViewPure(String viewPure) {
+        this.viewPure = viewPure;
+    }
+
+    public String getTimePure() {
+        return timePure;
+    }
+
+    public void setTimePure(String timePure) {
+        this.timePure = timePure;
+    }
+
+    public String getLikePure() {
+        return likePure;
+    }
+
+    public void setLikePure(String likePure) {
+        this.likePure = likePure;
+    }
+
+    public String getTitleVideo() {
+        return titleVideo;
+    }
+
+    public void setTitleVideo(String titleVideo) {
+        this.titleVideo = titleVideo;
+    }
 
     public String getTvTitleVideo() {
         return tvTitleVideo;
@@ -98,24 +151,11 @@ public class ItemVideoMain implements Serializable, InterfaceDefaultValue {
         this.numberSubscribe = numberSubscribe;
     }
 
-    private String tvTitleVideo;
-    private String ivVideo;
-    private String idChannel;
-    private String channelName;
-    private String viewCount;
-    private String tvNameChannel;
-    private String tvViewCount;
-    private String tvTimeUp;
-    private String publishedAt;
-    private String idVideo;
-    private String tvCommentCount;
-    private String likeCount;
-    private String urlAvtChannel;
-    private String numberSubscribe;
 
     public ItemVideoMain(String tvTitleVideo, String ivVideo, String idChannel,
                          String tvNameChannel, String tvTimeUp,
-                         String idVideo, String tvCommentCount, String likeCount) {
+                         String idVideo, String tvCommentCount, String likeCount,
+                         String description) {
         this.tvTitleVideo = tvTitleVideo;
         this.ivVideo = ivVideo;
         this.idChannel = idChannel;
@@ -124,11 +164,13 @@ public class ItemVideoMain implements Serializable, InterfaceDefaultValue {
         this.idVideo = idVideo;
         this.tvCommentCount = tvCommentCount;
         this.likeCount = likeCount;
+        this.description = description;
     }
 
     public ItemVideoMain(String tvTitleVideo, String ivVideo, String idChannel,
                          String tvNameChannel, String tvViewCount, String tvTimeUp,
-                         String idVideo, String tvCommentCount, String likeCount) {
+                         String idVideo, String tvCommentCount, String likeCount,
+                         String description) {
         this.tvTitleVideo = tvTitleVideo;
         this.ivVideo = ivVideo;
         this.idChannel = idChannel;
@@ -138,5 +180,6 @@ public class ItemVideoMain implements Serializable, InterfaceDefaultValue {
         this.idVideo = idVideo;
         this.tvCommentCount = tvCommentCount;
         this.likeCount = likeCount;
+        this.description = description;
     }
 }

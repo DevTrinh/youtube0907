@@ -14,6 +14,16 @@ public class ItemValueSearch implements Serializable {
     private String viewCount;
     private String numberSubscribe;
 
+    public String getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(String commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    private String commentCount;
+
     public String getNumberSubscribe() {
         return numberSubscribe;
     }

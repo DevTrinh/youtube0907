@@ -10,11 +10,11 @@ import androidx.annotation.Nullable;
 
 public interface InterfaceDefaultValue {
     //    String API_YOUTUBE_MAIN_VIDEO_VN = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=VN&key=AIzaSyDA2oRYCsTyVd6u5y1ypfda19b-fQZ_7VQ";
-    String API_YOUTUBE_MAIN_VIDEO = "https://youtube.googleapis.com/youtube/v3/videos?part=id&part=liveStreamingDetails&part=snippet&part=statistics&chart=mostPopular&maxResults=50&key=AIzaSyDRdRegOr75aUqqfmn625xb4DZ_6-eqKzA";
+    String API_YOUTUBE_MAIN_VIDEO = "https://youtube.googleapis.com/youtube/v3/videos?part=id&part=liveStreamingDetails&part=snippet&part=statistics&chart=mostPopular&maxResults=50&key=AIzaSyBqGtsd3uG32P2u2WPbfiS-9qF1uikVWJ8";
     String API_IMAGE_CHANNEL_YOUTUBE = "https://www.googleapis.com/youtube/v3/channels?part=snippet&id=UCwppdrjsBPAZg5_cUwQjfMQ&fields=items%2Fsnippet%2Fthumbnails&key=AIzaSyDA2oRYCsTyVd6u5y1ypfda19b-fQZ_7VQ";
     //    String infovideo  ... https://youtube.googleapis.com/youtube/v3/commentThreads?part=snippet%2Creplies&maxResults=100&videoId=_VB39Jo8mAQ&key=AIzaSyDA2oRYCsTyVd6u5y1ypfda19b-fQZ_7VQ
     String API_YOUTUBE_EXPLORE = "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=VN&key=AIzaSyDA2oRYCsTyVd6u5y1ypfda19b-fQZ_7VQ";
-    String API_KEY = "AIzaSyDRdRegOr75aUqqfmn625xb4DZ_6-eqKzA";
+    String API_KEY = "AIzaSyBqGtsd3uG32P2u2WPbfiS-9qF1uikVWJ8";
     String PREF_SEARCH ="PREF_SEARCH";
     String ITEMS = "items";
     String ID = "id";
@@ -52,4 +52,11 @@ public interface InterfaceDefaultValue {
     String DATA_SEARCH = "DATA_SEARCH";
     String DESCRIPTION = "description";
     String IMAGE_CHANNEL = "IMAGE_CHANNEL";
+    String ID_REFRESH  = "ID_REFRESH";
+
+    String AUTHOR_DISPLAY_NAME = "authorDisplayName";
+    String TEXT_DISPLAY = "textDisplay";
+    String AUTHOR_PROFILE_IMAGE_URL = "authorProfileImageUrl";
+    String TOTAL_REPLY_COUNT = "totalReplyCount";
+    String TOP_LEVEL_COMMENT  = "topLevelComment";
 }
