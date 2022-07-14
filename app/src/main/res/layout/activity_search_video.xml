@@ -28,12 +28,12 @@
             android:layout_marginTop="@dimen/dp22"
             android:src="@drawable/ic_back"/>
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/et_search_video"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/bg_et_search"
-            android:hint="Search Youtube"
+            android:hint="@string/search_youtube"
             android:paddingLeft="@dimen/dp8"
             android:paddingTop="@dimen/dp4"
             android:paddingRight="@dimen/dp8"
@@ -58,7 +58,9 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/et_search_video"
             android:layout_marginLeft="@dimen/dp8"
-            android:layout_marginRight="@dimen/dp8" />
+            android:layout_marginRight="@dimen/dp8"
+            android:padding="@dimen/dp4"
+            android:background="@drawable/bg_mic"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeapp.R;
-import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
+import com.example.youtubeapp.interfacee.InterfaceClickFrame;
 import com.example.youtubeapp.item.ItemVideoMain;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.squareup.picasso.Picasso;
@@ -23,19 +23,19 @@ public class AdapterMainVideoYoutube extends
         RecyclerView.Adapter<AdapterMainVideoYoutube.ItemVideoMainViewHolder> {
 
     private ArrayList<ItemVideoMain> listItemVideoMain;
-    private InterfaceClickFrameVideo interfaceClickFrameVideo;
+    private InterfaceClickFrame interfaceClickFrame;
 
     public AdapterMainVideoYoutube(ArrayList<ItemVideoMain> listItemVideoMain,
-                                   InterfaceClickFrameVideo interfaceClickFrameVideo) {
+                                   InterfaceClickFrame interfaceClickFrame) {
         this.listItemVideoMain = listItemVideoMain;
-        this.interfaceClickFrameVideo = interfaceClickFrameVideo;
+        this.interfaceClickFrame = interfaceClickFrame;
     }
 
     @NonNull
     @Override
     public ItemVideoMainViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_main_video, parent, false);
+                .inflate(R.layout.item_video, parent, false);
         return new ItemVideoMainViewHolder(view);
     }
 
@@ -68,20 +68,20 @@ public class AdapterMainVideoYoutube extends
         holder.youTubeThumbnailView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                interfaceClickFrameVideo.onClickImageVideo(position);
+                interfaceClickFrame.onClickImage(position);
             }
         });
 
         holder.tvTitleMainItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                interfaceClickFrameVideo.onClickTitleVideo(position);
+                interfaceClickFrame.onClickTitle(position);
             }
         });
         holder.ivMenuVertical.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                interfaceClickFrameVideo.onClickMenuVideo(position);
+                interfaceClickFrame.onClickMenu(position);
             }
         });
     }
@@ -95,7 +95,7 @@ public class AdapterMainVideoYoutube extends
     }
 
     public class ItemVideoMainViewHolder extends RecyclerView.ViewHolder {
-        YouTubeThumbnailView youTubeThumbnailView;
+        ImageView youTubeThumbnailView;
         ImageView ivAvtChannel, ivMenuVertical;
         TextView tvTitleMainItem, tvNameChannel, tvViewer, tvTimeUp;
 
@@ -106,7 +106,7 @@ public class AdapterMainVideoYoutube extends
 
         public void mapping(@NonNull View view) {
             ivMenuVertical = view.findViewById(R.id.iv_item_main_menu_vertical);
-            youTubeThumbnailView = view.findViewById(R.id.iv_item_main_video);
+            youTubeThumbnailView = view.findViewById(R.id.iv_item_list_search);
             ivAvtChannel = view.findViewById(R.id.iv_item_main_avt_video);
             tvNameChannel = view.findViewById(R.id.tv_item_main_name_channel);
             tvTimeUp = view.findViewById(R.id.tv_item_main_time_up);

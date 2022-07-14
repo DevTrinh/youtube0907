@@ -4,15 +4,28 @@ import java.io.Serializable;
 
 public class ItemValueSearch implements Serializable {
     private String idVideo;
-    private String timeUp;
+    private String idListVideo;
     private String channelId;
+    private String numberSubscribe;
+    private String timeUp;
     private String urlAvtChannel;
     private String titleVideo;
     private String descriptionVideo;
     private String urlImage;
     private String channelTitle;
     private String viewCount;
-    private String numberSubscribe;
+    private String commentCount;
+    private String kind;
+    private String numberVideoList;
+
+    public String getIdListVideo() {
+        return idListVideo;
+    }
+
+    public void setIdListVideo(String idListVideo) {
+        this.idListVideo = idListVideo;
+    }
+
 
     public String getCommentCount() {
         return commentCount;
@@ -21,8 +34,6 @@ public class ItemValueSearch implements Serializable {
     public void setCommentCount(String commentCount) {
         this.commentCount = commentCount;
     }
-
-    private String commentCount;
 
     public String getNumberSubscribe() {
         return numberSubscribe;
@@ -64,7 +75,7 @@ public class ItemValueSearch implements Serializable {
         this.channelId = channelId;
     }
 
-    public String getTitleVideo() {
+    public String getTitle() {
         return titleVideo;
     }
 
@@ -104,7 +115,12 @@ public class ItemValueSearch implements Serializable {
         this.viewCount = viewCount;
     }
 
-    public ItemValueSearch(String idVideo, String timeUp, String channelId, String titleVideo, String descriptionVideo, String urlImage, String channelTitle, String viewCount) {
+    public ItemValueSearch(String kind, String idVideo,
+                           String timeUp, String channelId,
+                           String titleVideo, String descriptionVideo,
+                           String urlImage, String channelTitle,
+                           String viewCount, String idListVideo) {
+        this.kind = kind;
         this.idVideo = idVideo;
         this.timeUp = timeUp;
         this.channelId = channelId;
@@ -113,5 +129,22 @@ public class ItemValueSearch implements Serializable {
         this.urlImage = urlImage;
         this.channelTitle = channelTitle;
         this.viewCount = viewCount;
+        this.idListVideo = idListVideo;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public String getNumberVideoList() {
+        return numberVideoList;
+    }
+
+    public void setNumberVideoList(String numberVideoList) {
+        this.numberVideoList = numberVideoList;
     }
 }

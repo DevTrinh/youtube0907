@@ -1,7 +1,5 @@
 package com.example.youtubeapp;
 
-import static com.example.youtubeapp.preferences.PrefListSearch.getArrayList;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,17 +12,16 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.youtubeapp.adapter.AdapterHistorySearch;
-import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
 import com.example.youtubeapp.interfacee.InterfaceClickSearch;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 import com.example.youtubeapp.item.ItemSearch;
-import com.example.youtubeapp.preferences.PrefListSearch;
 import com.example.youtubeapp.preferences.PrefSearch;
 
 import java.util.ArrayList;
@@ -32,7 +29,7 @@ import java.util.ArrayList;
 public class ActivitySearchVideo extends AppCompatActivity implements InterfaceDefaultValue {
     private RecyclerView rvHistorySearch;
     public static AdapterHistorySearch adapterHistorySearch;
-    public static EditText etSearch;
+    public static AutoCompleteTextView etSearch;
     private ArrayList<ItemSearch> listItemSearch = new ArrayList<>();
     private ArrayList<ItemSearch> listRevert = new ArrayList<>();
     private ArrayList<String> listSearchString = new ArrayList<>();
@@ -99,7 +96,15 @@ public class ActivitySearchVideo extends AppCompatActivity implements InterfaceD
                 finish();
             }
         });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, COUNTRIES);
+        etSearch.setAdapter(adapter);
     }
+
+    private static final String[] COUNTRIES = new String[] {
+            "Belgium", "France", "Italy", "Germany", "Spain"
+    };
 
     @NonNull
     private ArrayList<ItemSearch> getHistorySearch(){
@@ -110,6 +115,7 @@ public class ActivitySearchVideo extends AppCompatActivity implements InterfaceD
         return list;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onResume() {
         adapterHistorySearch.notifyDataSetChanged();
@@ -140,7 +146,7 @@ public class ActivitySearchVideo extends AppCompatActivity implements InterfaceD
     public void mapping(){
         ivBackHome = findViewById(R.id.ic_back_search);
         rvHistorySearch = findViewById(R.id.rv_history_search);
-        tvHistorySearch = findViewById(R.id.tv_history);
+        tvHistorySearch = findViewById(R.id.tv_suggest);
         etSearch = findViewById(R.id.et_search_video);
     }
 }

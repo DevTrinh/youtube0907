@@ -1,7 +1,6 @@
 package com.example.youtubeapp.adapter;
 
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeapp.R;
-import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
+import com.example.youtubeapp.interfacee.InterfaceClickFrame;
 import com.example.youtubeapp.item.ItemVideoMain;
 import com.google.android.youtube.player.YouTubeThumbnailView;
 import com.squareup.picasso.Picasso;
@@ -28,12 +27,12 @@ public class AdapterLoadPageTest extends
 
     private boolean isLoadingAdd;
     private ArrayList<ItemVideoMain> listItemVideoMain;
-    private InterfaceClickFrameVideo interfaceClickFrameVideo;
+    private InterfaceClickFrame interfaceClickFrame;
 
     public AdapterLoadPageTest(ArrayList<ItemVideoMain> listItemVideoMain,
-                                   InterfaceClickFrameVideo interfaceClickFrameVideo) {
+                                   InterfaceClickFrame interfaceClickFrame) {
         this.listItemVideoMain = listItemVideoMain;
-        this.interfaceClickFrameVideo = interfaceClickFrameVideo;
+        this.interfaceClickFrame = interfaceClickFrame;
     }
 
     @Override
@@ -49,7 +48,7 @@ public class AdapterLoadPageTest extends
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (TYPE_ITEM == viewType){
-            View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_main_video, null);
+            View view =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_video, null);
             return new ItemVideoMainViewHolder(view);
         }
         else{
@@ -107,7 +106,7 @@ public class AdapterLoadPageTest extends
 
         public void mapping(@NonNull View view) {
             ivMenuVertical = view.findViewById(R.id.iv_item_main_menu_vertical);
-            youTubeThumbnailView = view.findViewById(R.id.iv_item_main_video);
+            youTubeThumbnailView = view.findViewById(R.id.iv_item_list_search);
             ivAvtChannel = view.findViewById(R.id.iv_item_main_avt_video);
             tvNameChannel = view.findViewById(R.id.tv_item_main_name_channel);
             tvTimeUp = view.findViewById(R.id.tv_item_main_time_up);
@@ -123,7 +122,7 @@ public class AdapterLoadPageTest extends
         public ItemLoadViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            pbLoadPage = itemView.findViewById(R.id.pb_load_video);
+            pbLoadPage = itemView.findViewById(R.id.pb_only_load);
         }
     }
 }

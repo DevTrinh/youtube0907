@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,14 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeapp.R;
 import com.example.youtubeapp.item.ItemComment;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterListComment extends
         RecyclerView.Adapter<AdapterListComment.ListCommentViewHolder> {
 
-    List<ItemComment> listComment;
+    ArrayList<ItemComment> listComment;
 
     public AdapterListComment(ArrayList<ItemComment> listComment) {
         this.listComment = listComment;
@@ -40,9 +41,7 @@ public class AdapterListComment extends
         if (itemComment == null){
             return;
         }
-        if (itemComment.getUrlAvtChannelComment() != null){
-//            Picasso.get().load(itemComment.getUrlAvtChannelComment()).into(holder.ivAvtItemComment);
-        }
+        Picasso.get().load(itemComment.getUrlAvtChannelComment()).into(holder.ivAvtItemComment);
         holder.tvItemNameChannel.setText(itemComment.getNameChannelComment());
         holder.tvTimeAgoComment.setText(itemComment.getTimeComment());
         holder.tvContentComment.setText(itemComment.getContentComment());
@@ -65,7 +64,7 @@ public class AdapterListComment extends
 
     public class ListCommentViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView ivAvtItemComment;
+        private CircleImageView ivAvtItemComment;
         private TextView tvItemNameChannel, tvTimeAgoComment,
                 tvContentComment, tvNumberLikeComment, tvReplyComment;
 
@@ -75,7 +74,7 @@ public class AdapterListComment extends
         }
 
         public void mapping(@NonNull View view){
-            ivAvtItemComment = view.findViewById(R.id.iv_avt_user_comments);
+            ivAvtItemComment = view.findViewById(R.id.iv_item_avt_comment);
             tvItemNameChannel = view.findViewById(R.id.tv_item_name_channel);
             tvTimeAgoComment = view.findViewById(R.id.tv_item_time_ago_comment);
             tvNumberLikeComment = view.findViewById(R.id.tv_item_number_like_comment);

@@ -43,4 +43,14 @@
     <string name="jul_10">Jul 10</string>
     <string name="views">Views</string>
     <string name="_2002">2002</string>
+    <string name="all">All</string>
+    <string name="_explore">"Explore"</string>
+    <string name="l_p_tr_nh_android_a_z_khoa_ph_m">Lập trình Android A-Z - Khoa Phạm</string>
+    <string name="_194_video">194 video</string>
+    <string name="trung_t_m_o_t_o_tin_h_c_khoa_ph_m">Trung Tâm Đào Tạo Công Nghệ Khoa Phạm</string>
+    <string name="_65_2k_subscribers">65.2k subscribers</string>
+    <string name="_2_2k_videos">2.2k videos</string>
+    <string name="subscribe">SUBSCRIBE</string>
+    <string name="txt194">194</string>
+    <string name="search_youtube">Search Youtube</string>
 </resources>

@@ -30,17 +30,32 @@
         <entry key="..\:/JavaAndroid/YoutubeApp/app/src/main/res/layout/item_main_video.xml" value="0.428125" />
         <entry key="..\:/JavaAndroid/YoutubeApp/app/src/main/res/layout/layout_bottom_sheet_list_comment.xml" value="0.25" />
         <entry key="..\:/JavaAndroid/YoutubeApp/app/src/main/res/menu/menu_bottom_main.xml" value="0.42916666666666664" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/drawable/bg_mic.xml" value="0.1825" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/drawable/bg_notification_channel.xml" value="0.1825" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/drawable/bg_on_selected_key.xml" value="0.1845" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/drawable/bg_topic_main_off_select.xml" value="0.1845" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/drawable/bg_topic_main_on_select.xml" value="0.1845" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/activity_main.xml" value="0.3522873022659256" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/activity_play_video.xml" value="0.33" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/activity_search_video.xml" value="0.28858486532706284" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_comment_video.xml" value="0.3522873022659256" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_description_video.xml" value="0.33" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_explore.xml" value="0.3522873022659256" />
-        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_home.xml" value="0.1851218469431381" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_home.xml" value="0.33" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_library.xml" value="0.3522873022659256" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/fragment_value_search.xml" value="0.3522873022659256" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_channel_search.xml" value="0.33" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_comment_video.xml" value="0.3522873022659256" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_history_search.xml" value="0.3522873022659256" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_hot_keywords.xml" value="0.3522873022659256" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_icon_explore.xml" value="0.3522873022659256" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_main_video.xml" value="0.1851218469431381" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_prgessbar.xml" value="0.28559213339033773" />
-        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/layout_bottom_sheet_list_comment.xml" value="0.3522873022659256" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_suggest_search.xml" value="0.3514322359982899" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_value_channel_search.xml" value="0.31936725096194957" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_value_list_search.xml" value="0.33" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/item_video.xml" value="0.33" />
+        <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/layout_bottom_sheet_list_comment.xml" value="0.25" />
         <entry key="..\:/JavaAndroid/youtube0907/app/src/main/res/layout/you_tube_api_test.xml" value="0.2864471996579735" />
         <entry key="..\:/Users/ADMIN/Desktop/Youtube0707/app/src/main/res/drawable/radius_top_left_top_right_des.xml" value="0.19" />
         <entry key="..\:/Users/ADMIN/Desktop/Youtube0707/app/src/main/res/layout-v28/activity_play_video_test.xml" value="0.42916666666666664" />

@@ -72,7 +72,7 @@ public class AdapterHistorySearch extends RecyclerView.Adapter<AdapterHistorySea
         public SearchViewHolder(@NonNull View itemView) {
             super(itemView);
             ivArrow = itemView.findViewById(R.id.iv_arrow_search);
-            tvItemHistory = itemView.findViewById(R.id.tv_history);
+            tvItemHistory = itemView.findViewById(R.id.tv_suggest);
         }
     }
 }

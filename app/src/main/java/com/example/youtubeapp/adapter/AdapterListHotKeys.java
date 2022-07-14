@@ -1,5 +1,7 @@
 package com.example.youtubeapp.adapter;
 
+import android.annotation.SuppressLint;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +36,10 @@ public class AdapterListHotKeys extends
     @Override
     public void onBindViewHolder(@NonNull ItemHotKeyViewHolder holder, int position) {
         String value = listKey.get(position);
+        if (position == 0){
+            holder.tvKeyWords.setBackgroundResource(R.drawable.bg_on_selected_key);
+            holder.tvKeyWords.setTextColor(Color.WHITE);
+        }
         holder.tvKeyWords.setText(value + "");
     }
 

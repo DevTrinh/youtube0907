@@ -32,8 +32,8 @@ import com.android.volley.toolbox.Volley;
 import com.example.youtubeapp.ActivityPlayVideo;
 import com.example.youtubeapp.ActivitySearchVideo;
 import com.example.youtubeapp.R;
-import com.example.youtubeapp.adapter.AdapterValueSearch;
-import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
+import com.example.youtubeapp.adapter.AdapterValueSearchF;
+import com.example.youtubeapp.interfacee.InterfaceClickFrame;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 import com.example.youtubeapp.item.ItemValueSearch;
 
@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 public class FragmentValueSearch extends Fragment implements InterfaceDefaultValue {
     private static RecyclerView rvListValueSearch;
-    private static AdapterValueSearch adapterValueSearch;
+    private static AdapterValueSearchF adapterValueSearch;
     public static ArrayList<ItemValueSearch> listValueSearch = new ArrayList<>();
     private EditText etSearch;
     private ImageView backSearch;
@@ -75,40 +75,52 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
         rvListValueSearch.setLayoutManager(linearLayoutManager);
 //        Toast.makeText(getContext(), listValueSearch.size()
 //                + "", Toast.LENGTH_SHORT).show();
-        adapterValueSearch = new AdapterValueSearch(listValueSearch,
-                new InterfaceClickFrameVideo() {
+        adapterValueSearch = new AdapterValueSearchF(listValueSearch,
+                new InterfaceClickFrame() {
                     @Override
-                    public void onClickTitleVideo(int position) {
+                    public void onClickTitle(int position) {
+
+                        if (listValueSearch.get(position).getKind().equals(KIND_VIDEO))
                         /*IMAGEVIEW ONCLICK*/
                         Log.d("TITLE ON CLICK: " + position,
-                                listValueSearch.get(position).getTitleVideo());
+                                listValueSearch.get(position).getTitle());
                         intentSearchToPlayVideo.putExtra(VALUE_SEARCH,
                                 listValueSearch.get(position));
-                        startActivity(intentSearchToPlayVideo);
+                        Log.d(listValueSearch.get(position).getIdListVideo(), "HUHUH");
+//                        startActivity(intentSearchToPlayVideo);
                     }
 
                     @Override
-                    public void onClickImageVideo(int position) {
+                    public void onClickImage(int position) {
                         /*TITTLE ONCLICK*/
                         Log.d("IMAGE VIEW ON CLICK: " + position,
-                                listValueSearch.get(position).getTitleVideo());
+                                listValueSearch.get(position).getTitle());
                         intentSearchToPlayVideo.putExtra(VALUE_SEARCH,
                                 listValueSearch.get(position));
                         startActivity(intentSearchToPlayVideo);
                     }
 
                     @Override
-                    public void onClickMenuVideo(int position) {
-                        Log.d("MENU VIDEO: " + position,
-                                listValueSearch.get(position).getTitleVideo());
+                    public void onClickMenu(int position) {
+                        Toast.makeText(getContext(), "MENU", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onClickChannelVideo(int position) {
+                    public void onClickAvtChannel(int position) {
                         Log.d("CHANNEL VIDEO: " + position,
-                                listValueSearch.get(position).getTitleVideo());
+                                listValueSearch.get(position).getTitle());
                     }
-                });
+
+                    @Override
+                    public void onClickSubs(int position) {
+                        Toast.makeText(getContext(), "Subscriber", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onClickContains(int position) {
+                        Toast.makeText(getContext(), listValueSearch.get(position).getTitle()+"", Toast.LENGTH_SHORT).show();
+                    }
+                }, getContext());
         rvListValueSearch.setAdapter(adapterValueSearch);
 //        CLICK X IN etSearch
         etSearch.setOnTouchListener(new View.OnTouchListener() {
@@ -145,6 +157,34 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
         return view;
     }
 
+    private void getAmountList(String idList, int position){
+        String URL = "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId="
+                + idList+"&key="+API_KEY;
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET,
+                URL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String amount;
+                    JSONObject jsonObject = response.getJSONObject(PAGE_INFO);
+                    amount = jsonObject.getString(TOTAL_RESULTS);
+                    listValueSearch.get(position).setNumberVideoList(amount);
+                    Toast.makeText(getContext(), amount
+                            +"", Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), error+"", Toast.LENGTH_SHORT).show();
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+    }
+
     private void getInfoChannel(String ID_CHANNEL, int position, int size) {
         if (position < size) {
             RequestQueue requestQueue = Volley.newRequestQueue(getContext());
@@ -152,7 +192,6 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                     "https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2Cstatistics&id="
                             + ID_CHANNEL + "&key=" + API_KEY + "",
                     null, new Response.Listener<JSONObject>() {
-                @SuppressLint("NotifyDataSetChanged")
                 public void onResponse(JSONObject response) {
                     try {
                         JSONArray jsonItems = response.getJSONArray(ITEMS);
@@ -210,13 +249,20 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                     String urlImage = "";
                     String channelTitle = "";
                     String viewCount = "";
+                    String kindSearch = "";
+                    String idListVideo = "";
+
                     JSONArray jsonItems = response.getJSONArray(ITEMS);
                     Log.d("JSON ITEMS: ", jsonItems.length() + "");
+
                     int size = 0;
                     for (int i = 0; i < jsonItems.length(); i++) {
                         JSONObject jsonItem = jsonItems.getJSONObject(i);
                         JSONObject jsonId = jsonItem.getJSONObject(ID);
-                        if (jsonId.has(ID_VIDEO)) {
+                        kindSearch = jsonId.getString(KIND);
+                        Log.d("KINDDDD", kindSearch);
+
+                        if (kindSearch.equals(KIND_VIDEO)){
                             idVideo = jsonId.getString(ID_VIDEO);
 //                            Log.d("VIDEO ID: "+i, idVideo);
                             JSONObject jsonSnippet = jsonItem.getJSONObject(SNIPPET);
@@ -235,16 +281,61 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                             channelTitle = jsonSnippet.getString(CHANNEL_TITLE);
 //                            Log.d("CHANNEL TITLE: "+i, channelTitle);
                             viewCount = "1.5M views";
-                        } else {
-                            size++;
-                            continue;
+                            listValueSearch.add(new ItemValueSearch(kindSearch,idVideo,
+                                    timeUp, channelId, titleVideo,
+                                    descriptionVideo, urlImage,
+                                    channelTitle, viewCount, idListVideo));
                         }
-                        listValueSearch.add(new ItemValueSearch(idVideo,
-                                timeUp, channelId, titleVideo,
-                                descriptionVideo, urlImage,
-                                channelTitle, viewCount));
-                        pbLoad.setVisibility(View.GONE);
 
+                        if (kindSearch.equals(KIND_LIST)){
+                            idListVideo = jsonId.getString(PLAY_LIST_ID);
+//                            Log.d("LISTTTTTTTTTTTTTTTT", idListVideo);
+                            getAmountList(idListVideo, i);
+//                            Toast.makeText(getContext(), "HAHAHAHAHA", Toast.LENGTH_SHORT).show();
+                            JSONObject jsonSnippet = jsonItem.getJSONObject(SNIPPET);
+//                            Log.d("JSON SNIPPET: "+i,FragmentHome.formatTimeUpVideo(jsonSnippet.getString(PUBLISHED_AT)));
+                            timeUp = FragmentHome.formatTimeUpVideo(jsonSnippet.getString(PUBLISHED_AT));
+                            channelId = jsonSnippet.getString(CHANNEL_ID);
+//                            Log.d("CHANNEL ID: "+i, channelId);
+                            getInfoChannel(channelId, i - size, jsonItems.length());
+                            titleVideo = jsonSnippet.getString(TITLE);
+//                            Log.d("TITLE CHANNEL: "+i, titleVideo);
+                            descriptionVideo = jsonSnippet.getString(DESCRIPTION);
+                            JSONObject jsonThumbnails = jsonSnippet.getJSONObject(THUMBNAIL);
+                            JSONObject jsonHigh = jsonThumbnails.getJSONObject(HIGH);
+                            urlImage = jsonHigh.getString(URL);
+//                            Log.d("URL IMAGE: " + i, urlImage);
+                            channelTitle = jsonSnippet.getString(CHANNEL_TITLE);
+
+                            listValueSearch.add(new ItemValueSearch(kindSearch,idVideo,
+                                    timeUp, channelId, titleVideo,
+                                    descriptionVideo, urlImage,
+                                    channelTitle, viewCount, idListVideo));
+                        }
+
+                        if (kindSearch.equals(KIND_CHANNEL)){
+
+//                            Toast.makeText(getContext(), "HAHAHAHAHA", Toast.LENGTH_SHORT).show();
+                            JSONObject jsonSnippet = jsonItem.getJSONObject(SNIPPET);
+//                            Log.d("JSON SNIPPET: "+i,FragmentHome.formatTimeUpVideo(jsonSnippet.getString(PUBLISHED_AT)));
+                            timeUp = FragmentHome.formatTimeUpVideo(jsonSnippet.getString(PUBLISHED_AT));
+                            channelId = jsonSnippet.getString(CHANNEL_ID);
+//                            Log.d("CHANNEL ID: "+i, channelId);
+                            getInfoChannel(channelId, i - size, jsonItems.length());
+                            titleVideo = jsonSnippet.getString(TITLE);
+//                            Log.d("TITLE CHANNEL: "+i, titleVideo);
+                            descriptionVideo = jsonSnippet.getString(DESCRIPTION);
+                            JSONObject jsonThumbnails = jsonSnippet.getJSONObject(THUMBNAIL);
+                            JSONObject jsonHigh = jsonThumbnails.getJSONObject(HIGH);
+                            urlImage = jsonHigh.getString(URL);
+                            Log.d("URL IMAGE: " + i, urlImage);
+                            channelTitle = jsonSnippet.getString(CHANNEL_TITLE);
+                            listValueSearch.add(new ItemValueSearch(kindSearch,idVideo,
+                                    timeUp, channelId, titleVideo,
+                                    descriptionVideo, urlImage,
+                                    channelTitle, viewCount, idListVideo));
+                        }
+                        pbLoad.setVisibility(View.GONE);
                     }
                 } catch (JSONException ignored) {
 

@@ -33,7 +33,7 @@
         app:layout_constraintRight_toRightOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar"
+            android:id="@+id/ap_contains_info"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:background="@color/white">
@@ -263,11 +263,14 @@
                         app:layout_constraintLeft_toRightOf="@id/iv_avt_channel_play"
                         app:layout_constraintTop_toTopOf="@id/iv_avt_channel_play"
                         app:layout_constraintBottom_toBottomOf="@+id/iv_avt_channel_play"
+                        android:layout_marginLeft="@dimen/dp12"
                         app:layout_constraintVertical_bias="0"
-                        android:text="@string/freak_d_music"
+                        android:text="@string/v_a_h_c_v_a_nh_n_b_u_tr_i_xanh_tuy_t_p_h_c_c_ng_t_i_b_s_u_t_p_nh_c_n_n_xu_t_1_gi"
+                        android:ellipsize="end"
+                        android:maxWidth="@dimen/dp200"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
-                        android:layout_marginLeft="@dimen/dp12"/>
+                        android:singleLine="true"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:onClick="clickChannel"

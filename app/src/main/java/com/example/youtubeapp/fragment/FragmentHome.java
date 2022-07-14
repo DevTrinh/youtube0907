@@ -4,11 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,10 +28,9 @@ import com.example.youtubeapp.ActivityPlayVideo;
 import com.example.youtubeapp.R;
 import com.example.youtubeapp.adapter.AdapterListHotKeys;
 import com.example.youtubeapp.adapter.AdapterMainVideoYoutube;
-import com.example.youtubeapp.interfacee.InterfaceClickFrameVideo;
+import com.example.youtubeapp.interfacee.InterfaceClickFrame;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 import com.example.youtubeapp.item.ItemVideoMain;
-import com.example.youtubeapp.pagination.PaginationScrollListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -83,9 +81,9 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
 
         getJsonApiYoutube();
         adapterMainVideoYoutube = new AdapterMainVideoYoutube(listItemVideo,
-                new InterfaceClickFrameVideo() {
+                new InterfaceClickFrame() {
                     @Override
-                    public void onClickTitleVideo(int position) {
+                    public void onClickTitle(int position) {
                         Intent intentMainToPlayVideo =
                                 new Intent(getContext(), ActivityPlayVideo.class);
                         intentMainToPlayVideo.putExtra(VALUE_ITEM_VIDEO,
@@ -94,7 +92,7 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                     }
 
                     @Override
-                    public void onClickImageVideo(int position) {
+                    public void onClickImage(int position) {
                         Intent intentMainToPlayVideo =
                                 new Intent(getContext(), ActivityPlayVideo.class);
                         intentMainToPlayVideo.putExtra(VALUE_ITEM_VIDEO,
@@ -103,19 +101,31 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                     }
 
                     @Override
-                    public void onClickMenuVideo(int position) {
+                    public void onClickMenu(int position) {
                         FragmentMenuItemVideoMain fragmentMenuItemVideoMain =
                                 new FragmentMenuItemVideoMain();
                         fragmentMenuItemVideoMain.show(getActivity()
                                 .getSupportFragmentManager(), getTag());
                     }
                     @Override
-                    public void onClickChannelVideo(int position) {
+                    public void onClickAvtChannel(int position) {
+
+                    }
+
+                    @Override
+                    public void onClickSubs(int position) {
+
+                    }
+
+                    @Override
+                    public void onClickContains(int position) {
 
                     }
                 });
 
         rvListVideoMain.setAdapter(adapterMainVideoYoutube);
+
+        rfMain.setOnRefreshListener(this);
         return view;
     }
 
@@ -240,15 +250,15 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
     @NonNull
     private ArrayList<String> getListKey() {
         ArrayList<String> list = new ArrayList<>();
-        list.add("Rap Việt");
-        list.add("No nut november");
-        list.add("Social Slang");
-        list.add("Running Man Việt Nam");
-        list.add("Body me");
-        list.add("Đội tuyển U23 Việt Nam");
-        list.add("Chảy nước miếng");
-        list.add("Vui đi, chờ chi cuối tuầ");
-        list.add("Không phải tại nó");
+        list.add("All");
+        list.add("Gaming");
+        list.add("Live");
+        list.add("Music");
+        list.add("News");
+        list.add("Soccer");
+        list.add("Army");
+        list.add("Entertainment");
+        list.add("Programing");
         return list;
     }
 
@@ -299,14 +309,23 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
     }
 
     public void mapping(@NonNull View view) {
-//        rfMain = view.findViewById(R.id.rf_layout_main);
+        rfMain = view.findViewById(R.id.rf_layout_main);
         pbLoadListVideoMain = view.findViewById(R.id.pb_load_list_video_main);
         rvListHotKeys = view.findViewById(R.id.lv_hot_keywords);
         rvListVideoMain = view.findViewById(R.id.rv_list_video_main);
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onRefresh() {
-
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                rfMain.setRefreshing(false);
+            }
+        },2000);
+        getJsonApiYoutube();
+        adapterMainVideoYoutube.notifyDataSetChanged();
     }
 }

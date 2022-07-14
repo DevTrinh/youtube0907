@@ -10,10 +10,15 @@
     <color name="v8">#C8C8C8</color>
     <color name="ccc">#ccc</color>
     <color name="colorCCC">#858585</color>
-    <color name="bg_et_search">#EDEDED</color>
+    <color name="bg_et_search">#f2f2f2</color>
     <color name="color75gey">#757575</color>
     <color name="color_5e_grey">#5E5E5E</color>
     <color name="red">#FF0000</color>
     <color name="color_link">#03A9F4</color>
     <color name="color5e">#5E5E5E</color>
+    <color name="color51">#515151</color>
+    <color name="nearWhite">#DFDFDF</color>
+    <color name="blur_black">#99000000</color>
+    <color name="color_e2">#f2f2f2</color>
+    <color name="color_f2">#f2f2f2</color>
 </resources>
