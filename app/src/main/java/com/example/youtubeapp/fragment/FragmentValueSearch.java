@@ -42,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FragmentValueSearch extends Fragment implements InterfaceDefaultValue {
     private static RecyclerView rvListValueSearch;
@@ -103,6 +104,10 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                     @Override
                     public void onClickMenu(int position) {
                         Toast.makeText(getContext(), "MENU", Toast.LENGTH_SHORT).show();
+                        FragmentMenuItemVideoMain fragmentMenuItemVideoMain =
+                                new FragmentMenuItemVideoMain();
+                        fragmentMenuItemVideoMain.show(getActivity()
+                                .getSupportFragmentManager(), getTag());
                     }
 
                     @Override
@@ -208,7 +213,7 @@ public class FragmentValueSearch extends Fragment implements InterfaceDefaultVal
                             listValueSearch.get(position).setNumberSubscribe
                                     (formatData(Integer.parseInt
                                             (jsonStatics.getString(SUBSCRIBE_COUNT)))
-                                            + "Subscribers");
+                                            + " Subscribers");
 //                    Log.d("AAAAA " + position, urlChannel);
                         }
 

@@ -11,16 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.youtubeapp.R;
+import com.example.youtubeapp.interfacee.InterfaceClickWithPosition;
 
 import java.util.ArrayList;
 
 public class AdapterListHotKeys extends
         RecyclerView.Adapter<AdapterListHotKeys.ItemHotKeyViewHolder> {
 
-    ArrayList<String> listKey;
+    private ArrayList<String> listKey;
+    private InterfaceClickWithPosition interfaceClickWithPosition;
 
-    public AdapterListHotKeys(ArrayList<String> listKey) {
+    public AdapterListHotKeys(ArrayList<String> listKey, InterfaceClickWithPosition interfaceClickWithPosition) {
         this.listKey = listKey;
+        this.interfaceClickWithPosition = interfaceClickWithPosition;
     }
 
     @NonNull
@@ -33,14 +36,23 @@ public class AdapterListHotKeys extends
         return new ItemHotKeyViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull ItemHotKeyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemHotKeyViewHolder holder,
+                                 @SuppressLint("RecyclerView") int position) {
         String value = listKey.get(position);
         if (position == 0){
             holder.tvKeyWords.setBackgroundResource(R.drawable.bg_on_selected_key);
             holder.tvKeyWords.setTextColor(Color.WHITE);
         }
         holder.tvKeyWords.setText(value + "");
+
+        holder.tvKeyWords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                interfaceClickWithPosition.onClickWithPosition(value);
+            }
+        });
     }
 
     @Override

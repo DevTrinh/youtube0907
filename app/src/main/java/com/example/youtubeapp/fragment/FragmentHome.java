@@ -29,6 +29,7 @@ import com.example.youtubeapp.R;
 import com.example.youtubeapp.adapter.AdapterListHotKeys;
 import com.example.youtubeapp.adapter.AdapterMainVideoYoutube;
 import com.example.youtubeapp.interfacee.InterfaceClickFrame;
+import com.example.youtubeapp.interfacee.InterfaceClickWithPosition;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 import com.example.youtubeapp.item.ItemVideoMain;
 
@@ -53,11 +54,6 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
     public static AdapterMainVideoYoutube adapterMainVideoYoutube;
     public String testUrlAvtChannel;
 
-    private boolean isLoading;
-    private boolean isLastPage;
-    private int currentPage = 0;
-    private int totalPage = 5;
-
     @SuppressLint("NotifyDataSetChanged")
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container,
@@ -75,7 +71,12 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
                 new LinearLayoutManager(getContext(),
                         LinearLayoutManager.HORIZONTAL, false);
         rvListHotKeys.setLayoutManager(linearLayoutManagerHorizontal);
-        adapterListHotKeys = new AdapterListHotKeys(getListKey());
+        adapterListHotKeys = new AdapterListHotKeys(getListKey(), new InterfaceClickWithPosition() {
+            @Override
+            public void onClickWithPosition(String value) {
+                Toast.makeText(getContext(), value+"", Toast.LENGTH_SHORT).show();
+            }
+        });
         rvListHotKeys.setAdapter(adapterListHotKeys);
         adapterListHotKeys.notifyDataSetChanged();
 
@@ -127,12 +128,6 @@ public class FragmentHome extends Fragment implements InterfaceDefaultValue,
 
         rfMain.setOnRefreshListener(this);
         return view;
-    }
-
-    private void setFirstData(){
-        if (currentPage < totalPage){
-//            adapterMainVideoYoutube.addFooterLoading();
-        }
     }
 
     private void getJsonApiYoutube() {

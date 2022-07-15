@@ -9,8 +9,8 @@
 
     <TextView
         android:id="@+id/tv_key_words"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:paddingLeft="14dp"
         android:paddingRight="14dp"
         android:paddingTop="4dp"

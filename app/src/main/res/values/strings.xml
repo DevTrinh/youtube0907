@@ -53,4 +53,16 @@
     <string name="subscribe">SUBSCRIBE</string>
     <string name="txt194">194</string>
     <string name="search_youtube">Search Youtube</string>
+    <string name="don_t_miss_new_video">Don\'t miss new videos</string>
+    <string name="sign_in_to_see_updates_from_your_favorite_youtube_channels">Sign in to see updates from your favorite Youtube channels</string>
+    <string name="sign_in">Sign in</string>
+    <string name="your_notifications_live_here">Your notifications live here</string>
+    <string name="subscribe_your_favorite_channels_to_get_notified_their_latest_videos">Subscribe your favorite channels to get notified their latest videos</string>
+    <string name="enjoy_your_favorite_videos">Enjoy your favorite videos</string>
+    <string name="des_library">Sign in to access videos that you\'ve liked or saved</string>
+    <string name="des_user_sigh_in">Sign in now to upload, save, and comment on videos</string>
+    <string name="setting">Settings</string>
+    <string name="help">Help &amp; feedback</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
 </resources>

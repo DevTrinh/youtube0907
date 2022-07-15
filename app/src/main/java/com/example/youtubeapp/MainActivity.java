@@ -12,24 +12,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.example.youtubeapp.fragment.FragmentBtSheetUser;
 import com.example.youtubeapp.fragment.FragmentExplore;
 import com.example.youtubeapp.fragment.FragmentHome;
 import com.example.youtubeapp.fragment.FragmentLibrary;
 import com.example.youtubeapp.fragment.FragmentNotify;
-import com.example.youtubeapp.fragment.FragmentOnlyPlay;
 import com.example.youtubeapp.fragment.FragmentSubs;
 import com.example.youtubeapp.fragment.FragmentValueSearch;
 import com.example.youtubeapp.interfacee.InterfaceDefaultValue;
 public class MainActivity extends AppCompatActivity implements InterfaceDefaultValue {
 
-    private FragmentExplore fragmentExplore;
-    private FragmentSubs fragmentSubs;
-    private FragmentHome fragmentHome;
-    private FragmentNotify fragmentNotify;
-    private FragmentLibrary fragmentLibrary;
-    private FragmentValueSearch fragmentValueSearch;
-    private FragmentOnlyPlay fragmentOnlyPlay;
     private ImageView ivEndNavHome, ivEndNavExplore,
             ivEndNavSubscriptions, ivEndNavNotification,
             ivEndNavLibrary, ivSearch, ivUser;
@@ -47,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceDefaultV
             Log.d("AHIHIHIHIHIHIIHIHI", valueSearch+"");
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             //ADD FRAGMENT
-             fragmentValueSearch = new FragmentValueSearch();
+            FragmentValueSearch fragmentValueSearch = new FragmentValueSearch();
             Bundle bundle = new Bundle();
             bundle.putString(VALUE_SEARCH, valueSearch);
             fragmentValueSearch.setArguments(bundle);
@@ -59,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceDefaultV
         else{
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             //ADD FRAGMENT
-            fragmentHome = new FragmentHome();
+            FragmentHome fragmentHome = new FragmentHome();
             fragmentTransaction.add(R.id.cl_contains_fragment,
                     fragmentHome, FRAGMENT_HOME);
             fragmentTransaction.addToBackStack(FRAGMENT_HOME);
@@ -69,9 +63,7 @@ public class MainActivity extends AppCompatActivity implements InterfaceDefaultV
         ivUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intentToPlay = new Intent(MainActivity.this, ActivityPlayVideoTest.class);
-//                intentToPlay.putExtra(ID, "T1QUEKLNPtA");
-                startActivity(intentToPlay);
+                openOnClickUser();
             }
         });
 
@@ -84,58 +76,57 @@ public class MainActivity extends AppCompatActivity implements InterfaceDefaultV
             }
         });
     }
+
+    private void openOnClickUser(){
+        FragmentBtSheetUser fragmentBtSheetUser = new FragmentBtSheetUser();
+        fragmentBtSheetUser.show(getSupportFragmentManager(), fragmentBtSheetUser.getTag());
+    }
+
     public void onClickHome(@NonNull View view) {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (view.getId()){
             case R.id.iv_end_bar_home:
                 setDisplayEndNavOff();
                 ivEndNavHome.setImageResource(R.drawable.ic_home_on);
+//                REMOVE IF SEARCH DISPLAY
                 manageFragment(FRAGMENT_SEARCH);
-                fragmentHome = new FragmentHome();
-                fragmentTransaction.replace(R.id.cl_contains_fragment, fragmentHome, FRAGMENT_HOME);
-                fragmentTransaction.addToBackStack(FRAGMENT_HOME);
+
                 getSupportFragmentManager().popBackStack(FRAGMENT_HOME, 0);
                 break;
             case R.id.iv_end_bar_explore:
                 setDisplayEndNavOff();
                 ivEndNavExplore.setImageResource(R.drawable.ic_explore_on);
-                fragmentExplore = new FragmentExplore();
-                fragmentTransaction.add(R.id.cl_contains_fragment, fragmentExplore, FRAGMENT_EXPLORE);
+                FragmentExplore fragmentExplore = new FragmentExplore();
+                fragmentTransaction.replace(R.id.cl_contains_fragment, fragmentExplore, FRAGMENT_EXPLORE);
                 fragmentTransaction.addToBackStack(FRAGMENT_EXPLORE);
-                getSupportFragmentManager().popBackStack(FRAGMENT_EXPLORE, 0);
-
+                Toast.makeText(this, "Fragment Ex", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.iv_end_bar_subscriptions:
                 setDisplayEndNavOff();
                 ivEndNavSubscriptions.setImageResource(R.drawable.ic_subscrip_on);
-                fragmentSubs = new FragmentSubs();
-                fragmentTransaction.add(R.id.cl_contains_fragment, fragmentSubs, FRAGMENT_SUBSCRIPTION);
+                FragmentSubs fragmentSubs = new FragmentSubs();
+                fragmentTransaction.replace(R.id.cl_contains_fragment, fragmentSubs, FRAGMENT_SUBSCRIPTION);
                 fragmentTransaction.addToBackStack(FRAGMENT_SUBSCRIPTION);
-                getSupportFragmentManager().popBackStack(FRAGMENT_SUBSCRIPTION, 0);
                 break;
             case R.id.iv_end_bar_notifications:
                 setDisplayEndNavOff();
-                ivEndNavNotification.setImageResource(R.drawable.ic_notification_on);
-                fragmentNotify = new FragmentNotify();
-                fragmentTransaction.add(R.id.cl_contains_fragment, fragmentNotify, FRAGMENT_NOTIFICATION);
+                ivEndNavNotification.setImageResource(R.drawable.ic_notifitcation_onn);
+                FragmentNotify fragmentNotify = new FragmentNotify();
+                fragmentTransaction.replace(R.id.cl_contains_fragment, fragmentNotify, FRAGMENT_NOTIFICATION);
                 fragmentTransaction.addToBackStack(FRAGMENT_NOTIFICATION);
-                getSupportFragmentManager().popBackStack(FRAGMENT_NOTIFICATION, 0);
                 break;
             case R.id.iv_end_bar_library:
                 setDisplayEndNavOff();
                 ivEndNavLibrary.setImageResource(R.drawable.ic_library_on);
-                fragmentLibrary = new FragmentLibrary();
-                fragmentTransaction.add(R.id.cl_contains_fragment, fragmentLibrary, FRAGMENT_LIBRARY);
+                FragmentLibrary fragmentLibrary = new FragmentLibrary();
+                fragmentTransaction.replace(R.id.cl_contains_fragment, fragmentLibrary, FRAGMENT_LIBRARY);
                 fragmentTransaction.addToBackStack(FRAGMENT_LIBRARY);
-                getSupportFragmentManager().popBackStack(FRAGMENT_LIBRARY, 0);
-//                fragmentOnlyPlay = new FragmentOnlyPlay();
-//                fragmentTransaction.add(R.id.cl_contains_fragment, fragmentOnlyPlay, "HAHAHA");
                 break;
         }
         fragmentTransaction.commit();
     }
 
-    public void manageFragment( String TAG_FRAGMENT){
+    public void manageFragment(String TAG_FRAGMENT){
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
         if(fragment != null)
             getSupportFragmentManager().beginTransaction().remove(fragment).commit();

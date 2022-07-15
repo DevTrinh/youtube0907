@@ -100,6 +100,7 @@ public class ActivitySearchVideo extends AppCompatActivity implements InterfaceD
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, COUNTRIES);
         etSearch.setAdapter(adapter);
+
     }
 
     private static final String[] COUNTRIES = new String[] {

@@ -37,4 +37,5 @@
     <dimen name="dp200">200dp</dimen>
     <dimen name="dp48">48dp</dimen>
     <dimen name="dp5">5dp</dimen>
+    <dimen name="dp20">20dp</dimen>
 </resources>
